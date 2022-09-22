@@ -1,0 +1,74 @@
+:root {
+  --hue-neutral: 268;
+  --hue-wrong: 2;
+  --hue-correct: 120;
+}
+
+.container {
+  width: 700px;
+  padding: 15px;
+  max-width: 90%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+body {
+  --hue: var(--hue-neutral);
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(var(--hue), 100%, 50%);
+}
+
+body.correct {
+  --hue: var(--hue-correct);
+}
+
+body.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  --hue: var(--hue-neutral);
+  background-color: hsl(var(--hue), 100%, 50%);
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  color: white;
+}
+
+.btn.correct {
+  --hue: var(--hue-correct);
+  color: black;
+}
+
+.btn.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.start-btn,
+.next-btn {
+  font-size: 16px;
+  padding: 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
