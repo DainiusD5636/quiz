@@ -31,7 +31,7 @@ let questions = [
 const startBtn = document.getElementById("start-btn");
 const nextBtn = document.getElementById("next-btn");
 const questionContainer = document.getElementById("question-container");
-const questionCon = document.getElementById("question");
+const question = document.getElementById("question");
 const answerBtn = document.getElementById("answer-btn");
 
 let randomQ, currentQ;
@@ -75,7 +75,7 @@ function countScore() {}
 function showScore() {}
 
 function showQuestion(question) {
-  questionCon.innerText = question.question;
+  question.innerText = question.question;
   question.answers.forEach((answer) => {
     const button = document.createElement("button");
     button.innerText = answer.text;
