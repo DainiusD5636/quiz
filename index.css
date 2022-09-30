@@ -14,11 +14,11 @@
 
 body {
   --hue: var(--hue-neutral);
-  justify-content: center;
   align-items: center;
   padding: 0;
   margin: 0;
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   background-color: hsl(var(--hue), 100%, 50%);
@@ -38,6 +38,16 @@ body.wrong {
   gap: 10px;
   margin: 20px 0;
 }
+.newP {
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+}
 
 .btn {
   --hue: var(--hue-neutral);
@@ -46,6 +56,30 @@ body.wrong {
   border: 1px solid black;
   padding: 5px 10px;
   color: white;
+  margin: 10px;
+}
+
+.allScores {
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 50px;
+}
+
+header {
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 50px 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn.correct {

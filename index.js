@@ -26,13 +26,37 @@ let questions = [
       { text: "Stannis Baratheon", correct: false },
     ],
   },
+  {
+    question: "What became of Arya Stark?",
+    answers: [
+      { text: "Dancer", correct: false },
+      { text: "Knight", correct: false },
+      { text: "Queen", correct: false },
+      { text: "Faceless Man", correct: true },
+    ],
+  },
+  {
+    question: "What is Jon Snow's real name?",
+    answers: [
+      { text: "Jon Snow", correct: false },
+      { text: "Jon Targaryen", correct: false },
+      { text: "Aegon Targaryen", correct: true },
+      { text: "Jon Stark", correct: false },
+    ],
+  },
 ];
 
-const startBtn = document.getElementById("start-btn");
-const nextBtn = document.getElementById("next-btn");
-const questionContainer = document.getElementById("question-container");
-const questionPlace = document.getElementById("question");
-const answerBtn = document.getElementById("answer-btn");
+let startBtn = document.getElementById("start-btn");
+let nextBtn = document.getElementById("next-btn");
+let questionContainer = document.getElementById("question-container");
+let questionPlace = document.getElementById("question");
+let answerBtn = document.getElementById("answer-btn");
+let score = 0;
+let myScore = document.getElementById("score");
+let allScore = document.getElementById("allScores");
+let rez = document.getElementById("rez");
+let divForScores = document.getElementById("forScores");
+let scoreNames = document.querySelector(".newP");
 
 let randomQ, currentQ;
 
@@ -62,17 +86,20 @@ function selectAnswer(e) {
   Array.from(answerBtn.children).forEach((button) => {
     correctOrWrong(button, button.dataset.correct);
   });
+
+  if (correct) {
+    score += 1;
+  }
+  myScore.innerHTML = "Score: " + score;
+
   if (randomQ.length > currentQ + 1) {
     nextBtn.classList.remove("hide");
   } else {
+    submitName();
     startBtn.innerText = "Restart";
     startBtn.classList.remove("hide");
   }
 }
-
-function countScore() {}
-
-function showScore() {}
 
 function showQuestion(question) {
   questionPlace.innerText = question.question;
@@ -108,4 +135,66 @@ function correctOrWrong(el, correct) {
 function clearCorrectOrWrong(el) {
   el.classList.remove("correct");
   el.classList.remove("wrong");
+}
+
+allScore.addEventListener("click", function () {
+  rez.innerHTML = "";
+  pullFromStorage();
+  let divForScores = document.createElement("div");
+  rez.appendChild(divForScores);
+  divForScores.className = "allScores";
+  divForScores.id = "forScores";
+
+  let clearBtn = document.createElement("button");
+  clearBtn.innerHTML = "Clear";
+  clearBtn.className = "btn";
+  divForScores.appendChild(clearBtn);
+  clearBtn.addEventListener("click", () => {
+    rez.innerHTML = "";
+  });
+});
+
+function submitName() {
+  questionContainer.classList.add("hide");
+  let divForInput = document.createElement("div");
+  divForInput.className = "allScores";
+  let subBtn = document.createElement("button");
+  let inputEl = document.createElement("input");
+  let pEl = document.createElement("p");
+  pEl.innerHTML = "Your Name:";
+  subBtn.innerHTML = "Submit";
+  subBtn.className = "btn";
+  subBtn.id = "retry ";
+  subBtn.addEventListener("click", () => {
+    submitToStorage();
+    pEl.remove();
+    inputEl.remove();
+    divForInput.remove();
+    subBtn.remove();
+  });
+
+  inputEl.id = "names";
+  divForInput.appendChild(pEl);
+  divForInput.appendChild(inputEl);
+  divForInput.appendChild(subBtn);
+  rez.appendChild(divForInput);
+}
+
+function submitToStorage() {
+  localStorage.setItem(document.getElementById("names").value, score);
+  restart();
+}
+
+function pullFromStorage() {
+  for (let key in localStorage) {
+    let pEl = document.createElement("p");
+    pEl.className = "newP";
+    pEl.innerHTML = "Name: " + key + "  ||  " + " Score: " + localStorage[key];
+    if (typeof localStorage[key] === "string") rez.appendChild(pEl);
+  }
+}
+
+function restart() {
+  score = 0;
+  myScore.innerHTML = "";
 }
